@@ -7,11 +7,26 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-table striped hover outlined :items="posts" :fields="fields" :filter="filter">
+        <b-table
+          striped
+          hover
+          outlined
+          :per-page="perPage"
+          :items="posts"
+          :fields="fields"
+          :filter="filter"
+          :current-page="currentPage"
+        >
           <template v-slot:cell(actions)="data">
             <b-button variant="danger" @click="deleteItem(data.item.id)">Delete</b-button>
           </template>
         </b-table>
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
       </b-col>
     </b-row>
   </div>
@@ -24,6 +39,8 @@ export default {
     return {
       fields: ["userId", "id", "title", "actions"],
       filter: "",
+      perPage: 10,
+      currentPage: 1,
       posts: [
         {
           userId: 1,
@@ -46,19 +63,14 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      alert(`Sample delete of post with ID: ${id}`);
+      const index = this.posts.indexOf((x) => x.id === id);
+      this.posts.splice(index, 1);
+    },
+  },
+  computed: {
+    rows() {
+      return this.posts.length;
     },
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
