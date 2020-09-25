@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+//add vuetify plugin
+import vuetify from '@/plugins/vuetify'
+
 Vue.config.productionTip = false
 
 //import css files
@@ -15,5 +18,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 new Vue({
+  //add vuetify to vue
+  vuetify,
   render: h => h(App),
 }).$mount('#app')
