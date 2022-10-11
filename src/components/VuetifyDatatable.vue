@@ -104,7 +104,7 @@
       },
 
       GetAccounts() {
-        let url = 'https://accounting.townklasik.com/accounts';
+        let url = 'http://accounting.townklasik.com/accounts';
 
         const config = {
           headers: {
@@ -118,7 +118,7 @@
 
       InsertNewAccount(e) {
         e.preventDefault;
-        let url = 'https://accounting.townklasik.com/accounts';
+        let url = 'http://accounting.townklasik.com/accounts';
         let data = {
           code: this.code,
           name: this.name,
